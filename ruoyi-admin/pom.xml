@@ -50,9 +50,16 @@
         </dependency>
 
          <!-- Mysql驱动包 -->
-        <dependency>
+        <!--<dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
+        </dependency>-->
+
+        <!-- Cache驱动包 -->
+        <dependency>
+            <groupId>com.mediway.jdbc</groupId>
+            <artifactId>cachejdbc</artifactId>
+            <version>mediway-1.0.0</version>
         </dependency>
 
         <!-- 核心模块-->
@@ -62,16 +69,16 @@
         </dependency>
 
         <!-- 定时任务-->
-        <dependency>
+        <!--<dependency>
             <groupId>com.ruoyi</groupId>
             <artifactId>ruoyi-quartz</artifactId>
-        </dependency>
+        </dependency>-->
 
         <!-- 代码生成-->
-        <dependency>
+        <!--<dependency>
             <groupId>com.ruoyi</groupId>
             <artifactId>ruoyi-generator</artifactId>
-        </dependency>
+        </dependency>-->
 
     </dependencies>
 

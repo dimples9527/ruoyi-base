@@ -13,7 +13,7 @@
     <description>若依管理系统</description>
     
     <properties>
-        <ruoyi.version>3.3.0</ruoyi.version>
+        <ruoyi.version>mediway-3.3.0</ruoyi.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
@@ -31,12 +31,13 @@
         <poi.version>4.1.2</poi.version>
         <velocity.version>1.7</velocity.version>
         <jwt.version>0.9.1</jwt.version>
+        <cache.version>1.0.0</cache.version>
+        <hutool.version>5.5.8</hutool.version>
     </properties>
 	
     <!-- 依赖声明 -->
     <dependencyManagement>
         <dependencies>
-        
             <!-- SpringBoot的依赖配置-->
             <dependency>
                 <groupId>org.springframework.boot</groupId>
@@ -44,6 +45,13 @@
                 <version>2.2.12.RELEASE</version>
                 <type>pom</type>
                 <scope>import</scope>
+            </dependency>
+
+            <!-- Cache数据库驱动 -->
+            <dependency>
+                <groupId>com.dhcc</groupId>
+                <artifactId>cachejdbc</artifactId>
+                <version>${cache.version}</version>
             </dependency>
             
             <!--阿里数据库连接池 -->
@@ -73,6 +81,14 @@
                 <artifactId>oshi-core</artifactId>
                 <version>${oshi.version}</version>
             </dependency>
+
+            <!-- hutool工具 -->
+            <dependency>
+                <groupId>cn.hutool</groupId>
+                <artifactId>hutool-all</artifactId>
+                <version>${hutool.version}</version>
+            </dependency>
+
 
             <dependency>
                 <groupId>net.java.dev.jna</groupId>
@@ -201,9 +217,10 @@
         <module>ruoyi-admin</module>
         <module>ruoyi-framework</module>
         <module>ruoyi-system</module>
-        <module>ruoyi-quartz</module>
+        <!--<module>ruoyi-quartz</module>-->
         <module>ruoyi-generator</module>
         <module>ruoyi-common</module>
+        <module>cache-test</module>
     </modules>
     <packaging>pom</packaging>
 
