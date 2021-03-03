@@ -1,19 +1,5 @@
 package com.ruoyi.web.controller.system;
 
-import java.util.List;
-import java.util.stream.Collectors;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.multipart.MultipartFile;
 import com.ruoyi.common.annotation.Log;
 import com.ruoyi.common.constant.UserConstants;
 import com.ruoyi.common.core.controller.BaseController;
@@ -32,11 +18,32 @@ import com.ruoyi.system.service.ISysPostService;
 import com.ruoyi.system.service.ISysRoleService;
 import com.ruoyi.system.service.ISysUserService;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.util.List;
+import java.util.stream.Collectors;
+
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiOperation;
+
 /**
  * 用户信息
  * 
  * @author ruoyi
  */
+@Api(tags = "若依系统管理接口模块")
 @RestController
 @RequestMapping("/system/user")
 public class SysUserController extends BaseController
@@ -56,6 +63,7 @@ public class SysUserController extends BaseController
     /**
      * 获取用户列表
      */
+    @ApiOperation(value = "获取用户列表")
     @PreAuthorize("@ss.hasPermi('system:user:list')")
     @GetMapping("/list")
     public TableDataInfo list(SysUser user)
@@ -65,6 +73,7 @@ public class SysUserController extends BaseController
         return getDataTable(list);
     }
 
+    @ApiOperation(value = "导出用户列表")
     @Log(title = "用户管理", businessType = BusinessType.EXPORT)
     @PreAuthorize("@ss.hasPermi('system:user:export')")
     @GetMapping("/export")
@@ -75,6 +84,8 @@ public class SysUserController extends BaseController
         return util.exportExcel(list, "用户数据");
     }
 
+    @ApiOperation(value = "导入用户数据")
+    @ApiImplicitParam(value = "支持更新",name = "updateSupport",paramType = "query")
     @Log(title = "用户管理", businessType = BusinessType.IMPORT)
     @PreAuthorize("@ss.hasPermi('system:user:import')")
     @PostMapping("/importData")
@@ -88,6 +99,7 @@ public class SysUserController extends BaseController
         return AjaxResult.success(message);
     }
 
+    @ApiOperation(value = "导入用户数据模板")
     @GetMapping("/importTemplate")
     public AjaxResult importTemplate()
     {
@@ -98,6 +110,8 @@ public class SysUserController extends BaseController
     /**
      * 根据用户编号获取详细信息
      */
+    @ApiOperation(value = "根据用户编号获取详细信息")
+    @ApiImplicitParam(value = "用户编号",name = "userId",paramType = "path")
     @PreAuthorize("@ss.hasPermi('system:user:query')")
     @GetMapping(value = { "/", "/{userId}" })
     public AjaxResult getInfo(@PathVariable(value = "userId", required = false) Long userId)
@@ -118,6 +132,7 @@ public class SysUserController extends BaseController
     /**
      * 新增用户
      */
+    @ApiOperation(value = "新增用户")
     @PreAuthorize("@ss.hasPermi('system:user:add')")
     @Log(title = "用户管理", businessType = BusinessType.INSERT)
     @PostMapping
@@ -145,6 +160,7 @@ public class SysUserController extends BaseController
     /**
      * 修改用户
      */
+    @ApiOperation(value = "修改用户")
     @PreAuthorize("@ss.hasPermi('system:user:edit')")
     @Log(title = "用户管理", businessType = BusinessType.UPDATE)
     @PutMapping
@@ -168,6 +184,8 @@ public class SysUserController extends BaseController
     /**
      * 删除用户
      */
+    @ApiOperation(value = "删除用户")
+    @ApiImplicitParam(value = "用户编号",name = "userIds",paramType = "path")
     @PreAuthorize("@ss.hasPermi('system:user:remove')")
     @Log(title = "用户管理", businessType = BusinessType.DELETE)
     @DeleteMapping("/{userIds}")
@@ -179,6 +197,7 @@ public class SysUserController extends BaseController
     /**
      * 重置密码
      */
+    @ApiOperation(value = "重置密码")
     @PreAuthorize("@ss.hasPermi('system:user:resetPwd')")
     @Log(title = "用户管理", businessType = BusinessType.UPDATE)
     @PutMapping("/resetPwd")
@@ -193,6 +212,7 @@ public class SysUserController extends BaseController
     /**
      * 状态修改
      */
+    @ApiOperation(value = "状态修改")
     @PreAuthorize("@ss.hasPermi('system:user:edit')")
     @Log(title = "用户管理", businessType = BusinessType.UPDATE)
     @PutMapping("/changeStatus")

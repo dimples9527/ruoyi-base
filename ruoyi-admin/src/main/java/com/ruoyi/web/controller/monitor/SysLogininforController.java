@@ -19,11 +19,16 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiOperation;
+
 /**
  * 系统访问记录
  * 
  * @author ruoyi
  */
+@Api(tags = "若依系统管理接口模块")
 @RestController
 @RequestMapping("/monitor/logininfor")
 public class SysLogininforController extends BaseController
@@ -31,6 +36,7 @@ public class SysLogininforController extends BaseController
     @Autowired
     private ISysLogininforService logininforService;
 
+    @ApiOperation(value = "获取用户登陆日志")
     @PreAuthorize("@ss.hasPermi('monitor:logininfor:list')")
     @GetMapping("/list")
     public TableDataInfo list(SysLogininfor logininfor)
@@ -40,6 +46,7 @@ public class SysLogininforController extends BaseController
         return getDataTable(list);
     }
 
+    @ApiOperation(value = "导出用户登陆日志")
     @Log(title = "登录日志", businessType = BusinessType.EXPORT)
     @PreAuthorize("@ss.hasPermi('monitor:logininfor:export')")
     @GetMapping("/export")
@@ -50,6 +57,8 @@ public class SysLogininforController extends BaseController
         return util.exportExcel(list, "登录日志");
     }
 
+    @ApiOperation(value = "删除用户登陆日志")
+    @ApiImplicitParam(value = "id",name = "infoIds",paramType = "path")
     @PreAuthorize("@ss.hasPermi('monitor:logininfor:remove')")
     @Log(title = "登录日志", businessType = BusinessType.DELETE)
     @DeleteMapping("/{infoIds}")
@@ -58,6 +67,7 @@ public class SysLogininforController extends BaseController
         return toAjax(logininforService.deleteLogininforByIds(infoIds));
     }
 
+    @ApiOperation(value = "清除用户登陆日志表数据")
     @PreAuthorize("@ss.hasPermi('monitor:logininfor:remove')")
     @Log(title = "登录日志", businessType = BusinessType.CLEAN)
     @DeleteMapping("/clean")

@@ -31,11 +31,16 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiOperation;
+
 /**
  * 角色信息
  *
  * @author ruoyi
  */
+@Api(tags = "若依系统管理接口模块")
 @RestController
 @RequestMapping("/system/role")
 public class SysRoleController extends BaseController {
@@ -51,6 +56,7 @@ public class SysRoleController extends BaseController {
     @Autowired
     private ISysUserService userService;
 
+    @ApiOperation(value = "获取角色列表")
     @PreAuthorize("@ss.hasPermi('system:role:list')")
     @GetMapping("/list")
     public TableDataInfo list(SysRole role) {
@@ -59,6 +65,7 @@ public class SysRoleController extends BaseController {
         return getDataTable(list);
     }
 
+    @ApiOperation(value = "导出角色列表")
     @Log(title = "角色管理", businessType = BusinessType.EXPORT)
     @PreAuthorize("@ss.hasPermi('system:role:export')")
     @GetMapping("/export")
@@ -71,6 +78,8 @@ public class SysRoleController extends BaseController {
     /**
      * 根据角色编号获取详细信息
      */
+    @ApiOperation(value = "根据角色编号获取详细信息")
+    @ApiImplicitParam(value = "角色编号",name = "roleId",paramType = "path")
     @PreAuthorize("@ss.hasPermi('system:role:query')")
     @GetMapping(value = "/{roleId}")
     public AjaxResult getInfo(@PathVariable Long roleId) {
@@ -80,6 +89,7 @@ public class SysRoleController extends BaseController {
     /**
      * 新增角色
      */
+    @ApiOperation(value = "新增角色")
     @PreAuthorize("@ss.hasPermi('system:role:add')")
     @Log(title = "角色管理", businessType = BusinessType.INSERT)
     @PostMapping
@@ -97,6 +107,7 @@ public class SysRoleController extends BaseController {
     /**
      * 修改保存角色
      */
+    @ApiOperation(value = "修改保存角色")
     @PreAuthorize("@ss.hasPermi('system:role:edit')")
     @Log(title = "角色管理", businessType = BusinessType.UPDATE)
     @PutMapping
@@ -125,6 +136,7 @@ public class SysRoleController extends BaseController {
     /**
      * 修改保存数据权限
      */
+    @ApiOperation(value = "修改保存数据权限")
     @PreAuthorize("@ss.hasPermi('system:role:edit')")
     @Log(title = "角色管理", businessType = BusinessType.UPDATE)
     @PutMapping("/dataScope")
@@ -136,6 +148,7 @@ public class SysRoleController extends BaseController {
     /**
      * 状态修改
      */
+    @ApiOperation(value = "状态修改")
     @PreAuthorize("@ss.hasPermi('system:role:edit')")
     @Log(title = "角色管理", businessType = BusinessType.UPDATE)
     @PutMapping("/changeStatus")
@@ -148,6 +161,8 @@ public class SysRoleController extends BaseController {
     /**
      * 删除角色
      */
+    @ApiOperation(value = "删除角色")
+    @ApiImplicitParam(value = "角色编号",name = "roleIds",paramType = "path")
     @PreAuthorize("@ss.hasPermi('system:role:remove')")
     @Log(title = "角色管理", businessType = BusinessType.DELETE)
     @DeleteMapping("/{roleIds}")
@@ -158,6 +173,7 @@ public class SysRoleController extends BaseController {
     /**
      * 获取角色选择框列表
      */
+    @ApiOperation(value = "获取角色选择框列表")
     @PreAuthorize("@ss.hasPermi('system:role:query')")
     @GetMapping("/optionselect")
     public AjaxResult optionselect() {

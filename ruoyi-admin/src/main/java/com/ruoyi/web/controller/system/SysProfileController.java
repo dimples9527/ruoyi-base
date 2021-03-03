@@ -1,15 +1,5 @@
 package com.ruoyi.web.controller.system;
 
-import java.io.IOException;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.multipart.MultipartFile;
 import com.ruoyi.common.annotation.Log;
 import com.ruoyi.common.config.RuoYiConfig;
 import com.ruoyi.common.core.controller.BaseController;
@@ -23,11 +13,29 @@ import com.ruoyi.common.utils.file.FileUploadUtils;
 import com.ruoyi.framework.web.service.TokenService;
 import com.ruoyi.system.service.ISysUserService;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.IOException;
+
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
+import io.swagger.annotations.ApiOperation;
+
 /**
  * 个人信息 业务处理
  * 
  * @author ruoyi
  */
+@Api(tags = "若依系统管理接口模块")
 @RestController
 @RequestMapping("/system/user/profile")
 public class SysProfileController extends BaseController
@@ -41,6 +49,7 @@ public class SysProfileController extends BaseController
     /**
      * 个人信息
      */
+    @ApiOperation(value = "个人信息")
     @GetMapping
     public AjaxResult profile()
     {
@@ -55,6 +64,7 @@ public class SysProfileController extends BaseController
     /**
      * 修改用户
      */
+    @ApiOperation(value = "修改用户")
     @Log(title = "个人信息", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult updateProfile(@RequestBody SysUser user)
@@ -76,6 +86,11 @@ public class SysProfileController extends BaseController
     /**
      * 重置密码
      */
+    @ApiOperation(value = "重置密码")
+    @ApiImplicitParams({
+            @ApiImplicitParam(value = "旧密码",name = "oldPassword",paramType = "query"),
+            @ApiImplicitParam(value = "新密码",name = "newPassword",paramType = "query")
+    })
     @Log(title = "个人信息", businessType = BusinessType.UPDATE)
     @PutMapping("/updatePwd")
     public AjaxResult updatePwd(String oldPassword, String newPassword)
@@ -104,6 +119,7 @@ public class SysProfileController extends BaseController
     /**
      * 头像上传
      */
+    @ApiOperation(value = "头像上传")
     @Log(title = "用户头像", businessType = BusinessType.UPDATE)
     @PostMapping("/avatar")
     public AjaxResult avatar(@RequestParam("avatarfile") MultipartFile file) throws IOException

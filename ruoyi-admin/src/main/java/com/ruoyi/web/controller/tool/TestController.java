@@ -1,9 +1,9 @@
 package com.ruoyi.web.controller.tool;
 
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import com.ruoyi.common.core.controller.BaseController;
+import com.ruoyi.common.core.domain.AjaxResult;
+import com.ruoyi.common.utils.StringUtils;
+
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -11,21 +11,21 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import com.ruoyi.common.core.controller.BaseController;
-import com.ruoyi.common.core.domain.AjaxResult;
-import com.ruoyi.common.utils.StringUtils;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiImplicitParam;
+
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import io.swagger.annotations.ApiOperation;
 
 /**
  * swagger 用户测试方法
  * 
  * @author ruoyi
  */
-@Api("用户信息管理")
+//@Api("用户信息管理")
 @RestController
 @RequestMapping("/test/user")
 public class TestController extends BaseController
@@ -36,7 +36,7 @@ public class TestController extends BaseController
         users.put(2, new UserEntity(2, "ry", "admin123", "15666666666"));
     }
 
-    @ApiOperation("获取用户列表")
+//    @ApiOperation("获取用户列表")
     @GetMapping("/list")
     public AjaxResult userList()
     {
@@ -44,8 +44,8 @@ public class TestController extends BaseController
         return AjaxResult.success(userList);
     }
 
-    @ApiOperation("获取用户详细")
-    @ApiImplicitParam(name = "userId", value = "用户ID", required = true, dataType = "int", paramType = "path")
+//    @ApiOperation("获取用户详细")
+//    @ApiImplicitParam(name = "userId", value = "用户ID", required = true, dataType = "int", paramType = "path")
     @GetMapping("/{userId}")
     public AjaxResult getUser(@PathVariable Integer userId)
     {
@@ -59,8 +59,8 @@ public class TestController extends BaseController
         }
     }
 
-    @ApiOperation("新增用户")
-    @ApiImplicitParam(name = "userEntity", value = "新增用户信息", dataType = "UserEntity")
+//    @ApiOperation("新增用户")
+//    @ApiImplicitParam(name = "userEntity", value = "新增用户信息", dataType = "UserEntity")
     @PostMapping("/save")
     public AjaxResult save(UserEntity user)
     {
@@ -71,8 +71,8 @@ public class TestController extends BaseController
         return AjaxResult.success(users.put(user.getUserId(), user));
     }
 
-    @ApiOperation("更新用户")
-    @ApiImplicitParam(name = "userEntity", value = "新增用户信息", dataType = "UserEntity")
+//    @ApiOperation("更新用户")
+//    @ApiImplicitParam(name = "userEntity", value = "新增用户信息", dataType = "UserEntity")
     @PutMapping("/update")
     public AjaxResult update(UserEntity user)
     {
@@ -88,8 +88,8 @@ public class TestController extends BaseController
         return AjaxResult.success(users.put(user.getUserId(), user));
     }
 
-    @ApiOperation("删除用户信息")
-    @ApiImplicitParam(name = "userId", value = "用户ID", required = true, dataType = "int", paramType = "path")
+//    @ApiOperation("删除用户信息")
+//    @ApiImplicitParam(name = "userId", value = "用户ID", required = true, dataType = "int", paramType = "path")
     @DeleteMapping("/{userId}")
     public AjaxResult delete(@PathVariable Integer userId)
     {

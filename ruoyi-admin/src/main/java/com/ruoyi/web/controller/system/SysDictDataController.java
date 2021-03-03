@@ -27,11 +27,14 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.ArrayList;
 import java.util.List;
 
+import io.swagger.annotations.Api;
+
 /**
  * 数据字典信息
  * 
  * @author ruoyi
  */
+@Api(tags = "若依系统管理接口模块")
 @RestController
 @RequestMapping("/system/dict/data")
 public class SysDictDataController extends BaseController

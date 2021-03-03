@@ -23,11 +23,14 @@ import com.ruoyi.common.utils.SecurityUtils;
 import com.ruoyi.common.utils.poi.ExcelUtil;
 import com.ruoyi.system.service.ISysDictTypeService;
 
+import io.swagger.annotations.Api;
+
 /**
  * 数据字典信息
  * 
  * @author ruoyi
  */
+@Api(tags = "若依系统管理接口模块")
 @RestController
 @RequestMapping("/system/dict/type")
 public class SysDictTypeController extends BaseController
