@@ -44,3 +44,5 @@ nbdist/
 !*/build/*.xml
 
 /ruoyi-ui/
+
+/cache-test

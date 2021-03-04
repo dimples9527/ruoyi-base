@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	
-    <groupId>com.ruoyi</groupId>
+    <groupId>com.ruoyi.cache</groupId>
     <artifactId>ruoyi-cache</artifactId>
     <version>mediway-3.3.0</version>
 
@@ -187,35 +187,35 @@
             
             <!-- 定时任务-->
             <dependency>
-                <groupId>com.ruoyi</groupId>
+                <groupId>com.ruoyi.cache</groupId>
                 <artifactId>ruoyi-cache-quartz</artifactId>
                 <version>${ruoyi.version}</version>
             </dependency>
 	
             <!-- 代码生成-->
             <dependency>
-                <groupId>com.ruoyi</groupId>
+                <groupId>com.ruoyi.cache</groupId>
                 <artifactId>ruoyi-cache-generator</artifactId>
                 <version>${ruoyi.version}</version>
             </dependency>
 			
             <!-- 核心模块-->
             <dependency>
-                <groupId>com.ruoyi</groupId>
+                <groupId>com.ruoyi.cache</groupId>
                 <artifactId>ruoyi-cache-framework</artifactId>
                 <version>${ruoyi.version}</version>
             </dependency>
 			
             <!-- 系统模块-->
             <dependency>
-                <groupId>com.ruoyi</groupId>
+                <groupId>com.ruoyi.cache</groupId>
                 <artifactId>ruoyi-cache-system</artifactId>
                 <version>${ruoyi.version}</version>
             </dependency>
 			
             <!-- 通用工具-->
             <dependency>
-                <groupId>com.ruoyi</groupId>
+                <groupId>com.ruoyi.cache</groupId>
                 <artifactId>ruoyi-cache-common</artifactId>
                 <version>${ruoyi.version}</version>
             </dependency>
