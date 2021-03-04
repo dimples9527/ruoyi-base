@@ -8,7 +8,7 @@
     <artifactId>ruoyi-cache</artifactId>
     <version>mediway-3.3.0</version>
 
-    <name>ruoyi</name>
+    <name>ruoyi-cache</name>
     <url>http://www.ruoyi.vip</url>
     <description>若依管理系统</description>
     
