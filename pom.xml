@@ -5,7 +5,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	
     <groupId>com.ruoyi</groupId>
-    <artifactId>ruoyi</artifactId>
+    <artifactId>ruoyi-cache</artifactId>
     <version>mediway-3.3.0</version>
 
     <name>ruoyi</name>
@@ -188,35 +188,35 @@
             <!-- 定时任务-->
             <dependency>
                 <groupId>com.ruoyi</groupId>
-                <artifactId>ruoyi-quartz</artifactId>
+                <artifactId>ruoyi-cache-quartz</artifactId>
                 <version>${ruoyi.version}</version>
             </dependency>
 	
             <!-- 代码生成-->
             <dependency>
                 <groupId>com.ruoyi</groupId>
-                <artifactId>ruoyi-generator</artifactId>
+                <artifactId>ruoyi-cache-generator</artifactId>
                 <version>${ruoyi.version}</version>
             </dependency>
 			
             <!-- 核心模块-->
             <dependency>
                 <groupId>com.ruoyi</groupId>
-                <artifactId>ruoyi-framework</artifactId>
+                <artifactId>ruoyi-cache-framework</artifactId>
                 <version>${ruoyi.version}</version>
             </dependency>
 			
             <!-- 系统模块-->
             <dependency>
                 <groupId>com.ruoyi</groupId>
-                <artifactId>ruoyi-system</artifactId>
+                <artifactId>ruoyi-cache-system</artifactId>
                 <version>${ruoyi.version}</version>
             </dependency>
 			
             <!-- 通用工具-->
             <dependency>
                 <groupId>com.ruoyi</groupId>
-                <artifactId>ruoyi-common</artifactId>
+                <artifactId>ruoyi-cache-common</artifactId>
                 <version>${ruoyi.version}</version>
             </dependency>
 
