@@ -29,6 +29,12 @@ public class LoginBody {
     private String code;
 
     /**
+     * 验证码
+     */
+    @ApiModelProperty(value = "角色代码")
+    private String roleKey;
+
+    /**
      * 唯一标识
      */
     @ApiModelProperty(value = "唯一标识")
@@ -64,5 +70,13 @@ public class LoginBody {
 
     public void setUuid(String uuid) {
         this.uuid = uuid;
+    }
+
+    public String getRoleKey() {
+        return roleKey;
+    }
+
+    public void setRoleKey(String roleKey) {
+        this.roleKey = roleKey;
     }
 }

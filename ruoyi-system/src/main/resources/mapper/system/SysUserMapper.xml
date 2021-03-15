@@ -89,6 +89,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where u.user_name = #{userName}
 	</select>
 
+	<select id="selectUserByUserNameRole" resultMap="SysUserResult">
+		<include refid="selectUserVo"/>
+		where u.user_name = #{userName} AND r.role_key = #{roleKey}
+	</select>
+
 	<select id="selectUserById" parameterType="Long" resultMap="SysUserResult">
 		<include refid="selectUserVo"/>
 		where u.user_id = #{userId}
