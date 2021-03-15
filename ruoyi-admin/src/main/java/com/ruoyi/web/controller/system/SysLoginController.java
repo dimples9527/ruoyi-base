@@ -3,17 +3,22 @@ package com.ruoyi.web.controller.system;
 import com.ruoyi.common.constant.Constants;
 import com.ruoyi.common.core.domain.AjaxResult;
 import com.ruoyi.common.core.domain.entity.SysMenu;
+import com.ruoyi.common.core.domain.entity.SysRole;
 import com.ruoyi.common.core.domain.entity.SysUser;
 import com.ruoyi.common.core.domain.model.LoginBody;
 import com.ruoyi.common.core.domain.model.LoginUser;
+import com.ruoyi.common.exception.CustomException;
 import com.ruoyi.common.utils.ServletUtils;
+import com.ruoyi.common.utils.StringUtils;
 import com.ruoyi.framework.web.service.SysLoginService;
 import com.ruoyi.framework.web.service.SysPermissionService;
 import com.ruoyi.framework.web.service.TokenService;
 import com.ruoyi.system.service.ISysMenuService;
+import com.ruoyi.system.service.ISysRoleService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -44,6 +49,9 @@ public class SysLoginController {
 
     @Autowired
     private TokenService tokenService;
+
+    @Autowired
+    private ISysRoleService roleService;
 
     /**
      * 登录方法
@@ -95,6 +103,33 @@ public class SysLoginController {
         LoginUser loginUser = tokenService.getLoginUser(ServletUtils.getRequest());
         // 用户信息
         SysUser user = loginUser.getUser();
+        List<SysMenu> menus = menuService.selectMenuTreeByUserId(user.getUserId());
+        return AjaxResult.success(menuService.buildMenus(menus));
+    }
+
+    /**
+     * 获取路由信息
+     *
+     * @return 路由信息
+     */
+    @ApiOperation(value = "获取路由信息")
+    @GetMapping("getRouters/{roleKey}")
+    public AjaxResult getRouters(@PathVariable String roleKey) {
+        LoginUser loginUser = tokenService.getLoginUser(ServletUtils.getRequest());
+        // 用户信息
+        SysUser user = loginUser.getUser();
+        if (StringUtils.isNotEmpty(roleKey)) {
+            List<SysRole> userRoleNameList = roleService.selectRolesByUserId(user.getUserId());
+            if (userRoleNameList != null && userRoleNameList.size() > 0) {
+                SysRole sysRole = userRoleNameList.stream()
+                        .filter(item -> item.getRoleKey().equals(roleKey))
+                        .findFirst()
+                        .orElseThrow(() -> new CustomException("无法识别的用户角色:" + roleKey));
+                List<SysMenu> menus = menuService.selectMenuTreeByRoleId(sysRole.getRoleId());
+                return AjaxResult.success(menuService.buildMenus(menus));
+            }
+        }
+
         List<SysMenu> menus = menuService.selectMenuTreeByUserId(user.getUserId());
         return AjaxResult.success(menuService.buildMenus(menus));
     }

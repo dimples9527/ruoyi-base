@@ -101,6 +101,12 @@ public class SysRoleServiceImpl implements ISysRoleService
         return roleMapper.selectRoleListByUserId(userId);
     }
 
+    @Override
+    public List<SysRole> selectRolesByUserId(Long userId) {
+        return roleMapper.selectRolePermissionByUserId(userId);
+    }
+
+
     /**
      * 通过角色ID查询角色
      * 
