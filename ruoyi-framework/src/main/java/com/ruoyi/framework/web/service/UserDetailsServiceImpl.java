@@ -1,6 +1,7 @@
 package com.ruoyi.framework.web.service;
 
 import com.ruoyi.common.constant.Constants;
+import com.ruoyi.common.core.domain.entity.SysRole;
 import com.ruoyi.common.core.domain.entity.SysUser;
 import com.ruoyi.common.core.domain.model.LoginUser;
 import com.ruoyi.common.enums.UserStatus;
@@ -16,6 +17,10 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+
+import java.util.stream.Collectors;
+
+import cn.hutool.core.util.ArrayUtil;
 
 /**
  * 用户验证处理
@@ -36,7 +41,8 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         String roleKey = (String) ServletUtils.getRequest().getAttribute(Constants.ROLE_KEY);
 //        SysUser user = userService.selectUserByUserName(username);
-        SysUser user = userService.selectUserByUserNameRole(username,roleKey);
+        SysUser user = userService.selectUserByUserNameRole(username, roleKey);
+        user.setRoleIds(ArrayUtil.toArray(user.getRoles().stream().map(SysRole::getRoleId).collect(Collectors.toList()), Long.class));
         if (StringUtils.isNull(user)) {
             log.info("登录用户：{} 不存在.", username);
             throw new UsernameNotFoundException("登录用户：" + username + " 不存在");
