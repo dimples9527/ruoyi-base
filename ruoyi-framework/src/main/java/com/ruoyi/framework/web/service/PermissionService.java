@@ -1,13 +1,18 @@
 package com.ruoyi.framework.web.service;
 
-import java.util.Set;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.util.CollectionUtils;
 import com.ruoyi.common.core.domain.entity.SysRole;
 import com.ruoyi.common.core.domain.model.LoginUser;
 import com.ruoyi.common.utils.ServletUtils;
 import com.ruoyi.common.utils.StringUtils;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
+
+import java.util.Set;
+
+import cn.hutool.core.collection.CollUtil;
+import cn.hutool.core.util.StrUtil;
 
 /**
  * RuoYi首创 自定义权限实现，ss取自SpringSecurity首字母
@@ -164,6 +169,7 @@ public class PermissionService
      */
     private boolean hasPermissions(Set<String> permissions, String permission)
     {
-        return permissions.contains(ALL_PERMISSION) || permissions.contains(StringUtils.trim(permission));
+        // 优化 permissions.contains(StringUtils.trim(permission)
+        return permissions.contains(ALL_PERMISSION) || StrUtil.containsIgnoreCase(permissions.toString(),StringUtils.trim(permission)));
     }
 }
