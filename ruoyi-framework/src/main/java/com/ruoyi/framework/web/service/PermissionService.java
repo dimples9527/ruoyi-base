@@ -11,7 +11,6 @@ import org.springframework.util.CollectionUtils;
 
 import java.util.Set;
 
-import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.StrUtil;
 
 /**
@@ -170,6 +169,6 @@ public class PermissionService
     private boolean hasPermissions(Set<String> permissions, String permission)
     {
         // 优化 permissions.contains(StringUtils.trim(permission)
-        return permissions.contains(ALL_PERMISSION) || StrUtil.containsIgnoreCase(permissions.toString(),StringUtils.trim(permission)));
+        return permissions.contains(ALL_PERMISSION) || StrUtil.containsIgnoreCase(permissions.toString(),StringUtils.trim(permission));
     }
 }
