@@ -98,7 +98,7 @@ public class SysRole extends BaseEntity {
      * 部门组（数据权限）
      */
     @ApiModelProperty(value = "部门组", hidden = true)
-    private Long[] deptIds;
+    private Long[] deptIds = new Long[0];
 
     public SysRole() {
 

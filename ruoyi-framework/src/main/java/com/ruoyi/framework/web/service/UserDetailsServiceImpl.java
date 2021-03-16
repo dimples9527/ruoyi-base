@@ -21,6 +21,7 @@ import org.springframework.stereotype.Service;
 import java.util.stream.Collectors;
 
 import cn.hutool.core.util.ArrayUtil;
+import cn.hutool.core.util.StrUtil;
 
 /**
  * 用户验证处理
@@ -40,8 +41,13 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         String roleKey = (String) ServletUtils.getRequest().getAttribute(Constants.ROLE_KEY);
-//        SysUser user = userService.selectUserByUserName(username);
-        SysUser user = userService.selectUserByUserNameRole(username, roleKey);
+        SysUser user;
+        if (StrUtil.isNotBlank(roleKey)) {
+            user = userService.selectUserByUserNameRole(username, roleKey);
+        } else {
+            user = userService.selectUserByUserName(username);
+        }
+
         user.setRoleIds(ArrayUtil.toArray(user.getRoles().stream().map(SysRole::getRoleId).collect(Collectors.toList()), Long.class));
         if (StringUtils.isNull(user)) {
             log.info("登录用户：{} 不存在.", username);
