@@ -10,6 +10,7 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
+import cn.hutool.core.util.ArrayUtil;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
@@ -202,6 +203,9 @@ public class SysRole extends BaseEntity {
     }
 
     public Long[] getMenuIds() {
+        if (ArrayUtil.isEmpty(menuIds)) {
+            return new Long[0];
+        }
         return menuIds;
     }
 
