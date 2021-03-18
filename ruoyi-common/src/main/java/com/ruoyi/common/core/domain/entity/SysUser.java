@@ -45,10 +45,16 @@ public class SysUser extends BaseEntity {
     private Long deptId;
 
     /**
-     * 部门ID
+     * 角色编号
      */
     @ApiModelProperty(value = "角色编号")
     private Long roleId;
+
+    /**
+     * 角色key
+     */
+    @ApiModelProperty(value = "角色key")
+    private String roleKey;
 
     /**
      * 用户账号
@@ -196,6 +202,14 @@ public class SysUser extends BaseEntity {
 
     public void setRoleId(Long roleId) {
         this.roleId = roleId;
+    }
+
+    public String getRoleKey() {
+        return roleKey;
+    }
+
+    public void setRoleKey(String roleKey) {
+        this.roleKey = roleKey;
     }
 
     @Size(min = 0, max = 30, message = "用户昵称长度不能超过30个字符")

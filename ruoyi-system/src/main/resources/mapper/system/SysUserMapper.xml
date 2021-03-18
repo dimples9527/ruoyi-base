@@ -85,6 +85,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	    <if test="roleId != null">
 		    AND r.role_id = #{roleId}
 	    </if>
+	    <if test="roleKey != null and roleKey != ''">
+		    AND r.role_key = #{roleKey}
+	    </if>
 	    <!-- 数据范围过滤 -->
 	    ${params.dataScope}
     </select>
