@@ -23,7 +23,7 @@ public class SysNotice extends BaseEntity {
     /**
      * 公告ID
      */
-    @ApiModelProperty(value = "公告ID")
+    @ApiModelProperty(value = "公告ID", hidden = true)
     private Long noticeId;
 
     /**
@@ -41,7 +41,7 @@ public class SysNotice extends BaseEntity {
     /**
      * 公告内容
      */
-    @ApiModelProperty(value = "公告内容")
+    @ApiModelProperty(value = "公告内容", hidden = true)
     private String noticeContent;
 
     /**

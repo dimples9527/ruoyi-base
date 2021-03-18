@@ -21,7 +21,7 @@ public class SysOperLog extends BaseEntity
     private static final long serialVersionUID = 1L;
 
     /** 日志主键 */
-    @ApiModelProperty(value = "操作序号")
+    @ApiModelProperty(value = "操作序号", hidden = true)
     @Excel(name = "操作序号", cellType = ColumnType.NUMERIC)
     private Long operId;
 
@@ -41,17 +41,17 @@ public class SysOperLog extends BaseEntity
     private Integer[] businessTypes;
 
     /** 请求方法 */
-    @ApiModelProperty(value = "请求方法")
+    @ApiModelProperty(value = "请求方法", hidden = true)
     @Excel(name = "请求方法")
     private String method;
 
     /** 请求方式 */
-    @ApiModelProperty(value = "请求方式")
+    @ApiModelProperty(value = "请求方式", hidden = true)
     @Excel(name = "请求方式")
     private String requestMethod;
 
     /** 操作类别（0其它 1后台用户 2手机端用户） */
-    @ApiModelProperty(value = "操作类别（0其它 1后台用户 2手机端用户）",allowableValues = "0,1,2")
+    @ApiModelProperty(value = "操作类别（0其它 1后台用户 2手机端用户）",allowableValues = "0,1,2", hidden = true)
     @Excel(name = "操作类别", readConverterExp = "0=其它,1=后台用户,2=手机端用户")
     private Integer operatorType;
 
@@ -61,47 +61,47 @@ public class SysOperLog extends BaseEntity
     private String operName;
 
     /** 部门名称 */
-    @ApiModelProperty(value = "部门名称")
+    @ApiModelProperty(value = "部门名称", hidden = true)
     @Excel(name = "部门名称")
     private String deptName;
 
     /** 请求url */
-    @ApiModelProperty(value = "请求地址")
+    @ApiModelProperty(value = "请求地址", hidden = true)
     @Excel(name = "请求地址")
     private String operUrl;
 
     /** 操作地址 */
-    @ApiModelProperty(value = "操作地址")
+    @ApiModelProperty(value = "操作地址", hidden = true)
     @Excel(name = "操作地址")
     private String operIp;
 
     /** 操作地点 */
-    @ApiModelProperty(value = "操作地点")
+    @ApiModelProperty(value = "操作地点", hidden = true)
     @Excel(name = "操作地点")
     private String operLocation;
 
     /** 请求参数 */
-    @ApiModelProperty(value = "请求参数")
+    @ApiModelProperty(value = "请求参数", hidden = true)
     @Excel(name = "请求参数")
     private String operParam;
 
     /** 返回参数 */
-    @ApiModelProperty(value = "返回参数")
+    @ApiModelProperty(value = "返回参数", hidden = true)
     @Excel(name = "返回参数")
     private String jsonResult;
 
     /** 操作状态（0正常 1异常） */
-    @ApiModelProperty(value = "状态（0正常 1异常）",allowableValues = "0,1")
+    @ApiModelProperty(value = "状态（0正常 1异常）",allowableValues = "0,1", hidden = true)
     @Excel(name = "状态", readConverterExp = "0=正常,1=异常")
     private Integer status;
 
     /** 错误消息 */
-    @ApiModelProperty(value = "错误消息")
+    @ApiModelProperty(value = "错误消息", hidden = true)
     @Excel(name = "错误消息")
     private String errorMsg;
 
     /** 操作时间 */
-    @ApiModelProperty(value = "操作时间")
+    @ApiModelProperty(value = "操作时间", hidden = true)
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @Excel(name = "操作时间", width = 30, dateFormat = "yyyy-MM-dd HH:mm:ss")
     private Date operTime;

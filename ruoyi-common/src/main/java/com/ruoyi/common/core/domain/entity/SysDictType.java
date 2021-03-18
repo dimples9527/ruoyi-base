@@ -24,7 +24,7 @@ public class SysDictType extends BaseEntity
     private static final long serialVersionUID = 1L;
 
     /** 字典主键 */
-    @ApiModelProperty(value = "字典主键")
+    @ApiModelProperty(value = "字典主键", hidden = true)
     @Excel(name = "字典主键", cellType = ColumnType.NUMERIC)
     private Long dictId;
 

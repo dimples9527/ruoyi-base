@@ -27,14 +27,14 @@ public class SysDictData extends BaseEntity {
      * 字典编码
      */
     @Excel(name = "字典编码", cellType = ColumnType.NUMERIC)
-    @ApiModelProperty(value = "字典编码")
+    @ApiModelProperty(value = "字典编码", hidden = true)
     private Long dictCode;
 
     /**
      * 字典排序
      */
     @Excel(name = "字典排序", cellType = ColumnType.NUMERIC)
-    @ApiModelProperty(value = "字典排序")
+    @ApiModelProperty(value = "字典排序", hidden = true)
     private Long dictSort;
 
     /**
@@ -48,7 +48,7 @@ public class SysDictData extends BaseEntity {
      * 字典键值
      */
     @Excel(name = "字典键值")
-    @ApiModelProperty(value = "字典键值")
+    @ApiModelProperty(value = "字典键值", hidden = true)
     private String dictValue;
 
     /**
@@ -61,13 +61,13 @@ public class SysDictData extends BaseEntity {
     /**
      * 样式属性（其他样式扩展）
      */
-    @ApiModelProperty(value = "样式属性")
+    @ApiModelProperty(value = "样式属性", hidden = true)
     private String cssClass;
 
     /**
      * 表格字典样式
      */
-    @ApiModelProperty(value = "表格字典样式")
+    @ApiModelProperty(value = "表格字典样式", hidden = true)
     private String listClass;
 
     /**
@@ -81,7 +81,7 @@ public class SysDictData extends BaseEntity {
      * 状态（0正常 1停用）
      */
     @Excel(name = "状态", readConverterExp = "0=正常,1=停用")
-    @ApiModelProperty(value = "状态")
+    @ApiModelProperty(value = "状态", hidden = true)
     private String status;
 
     public Long getDictCode() {

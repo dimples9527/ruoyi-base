@@ -33,7 +33,7 @@ public class SysUser extends BaseEntity {
     /**
      * 用户ID
      */
-    @ApiModelProperty(value = "用户序号")
+    @ApiModelProperty(value = "用户序号", hidden = true)
     @Excel(name = "用户序号", cellType = ColumnType.NUMERIC, prompt = "用户编号")
     private Long userId;
 
@@ -66,14 +66,14 @@ public class SysUser extends BaseEntity {
     /**
      * 用户昵称
      */
-    @ApiModelProperty(value = "用户名称")
+    @ApiModelProperty(value = "用户名称", hidden = true)
     @Excel(name = "用户名称")
     private String nickName;
 
     /**
      * 用户邮箱
      */
-    @ApiModelProperty(value = "用户邮箱")
+    @ApiModelProperty(value = "用户邮箱", hidden = true)
     @Excel(name = "用户邮箱")
     private String email;
 
@@ -87,14 +87,14 @@ public class SysUser extends BaseEntity {
     /**
      * 用户性别
      */
-    @ApiModelProperty(value = "用户性别", allowableValues = "0,1,2")
+    @ApiModelProperty(value = "用户性别", allowableValues = "0,1,2", hidden = true)
     @Excel(name = "用户性别", readConverterExp = "0=男,1=女,2=未知")
     private String sex;
 
     /**
      * 用户头像
      */
-    @ApiModelProperty(value = "用户头像")
+    @ApiModelProperty(value = "用户头像", hidden = true)
     private String avatar;
 
     /**
@@ -119,20 +119,20 @@ public class SysUser extends BaseEntity {
     /**
      * 删除标志（0代表存在 2代表删除）
      */
-    @ApiModelProperty(value = "删除标志（0代表存在 2代表删除）", allowableValues = "0,2")
+    @ApiModelProperty(value = "删除标志（0代表存在 2代表删除）", allowableValues = "0,2", hidden = true)
     private String delFlag;
 
     /**
      * 最后登录IP
      */
-    @ApiModelProperty(value = "最后登录IP")
+    @ApiModelProperty(value = "最后登录IP", hidden = true)
     @Excel(name = "最后登录IP", type = Type.EXPORT)
     private String loginIp;
 
     /**
      * 最后登录时间
      */
-    @ApiModelProperty(value = "最后登录时间")
+    @ApiModelProperty(value = "最后登录时间", hidden = true)
     @Excel(name = "最后登录时间", width = 30, dateFormat = "yyyy-MM-dd HH:mm:ss", type = Type.EXPORT)
     private Date loginDate;
 

@@ -21,7 +21,7 @@ public class SysLogininfor extends BaseEntity
     private static final long serialVersionUID = 1L;
 
     /** ID */
-    @ApiModelProperty(value = "序号")
+    @ApiModelProperty(value = "序号", hidden = true)
     @Excel(name = "序号", cellType = ColumnType.NUMERIC)
     private Long infoId;
 
@@ -31,7 +31,7 @@ public class SysLogininfor extends BaseEntity
     private String userName;
 
     /** 登录状态 0成功 1失败 */
-    @ApiModelProperty(value = "登录状态",allowableValues = "1,0")
+    @ApiModelProperty(value = "登录状态",allowableValues = "1,0", hidden = true)
     @Excel(name = "登录状态", readConverterExp = "0=成功,1=失败")
     private String status;
 
@@ -41,27 +41,27 @@ public class SysLogininfor extends BaseEntity
     private String ipaddr;
 
     /** 登录地点 */
-    @ApiModelProperty(value = "登录地点")
+    @ApiModelProperty(value = "登录地点", hidden = true)
     @Excel(name = "登录地点")
     private String loginLocation;
 
     /** 浏览器类型 */
-    @ApiModelProperty(value = "浏览器")
+    @ApiModelProperty(value = "浏览器", hidden = true)
     @Excel(name = "浏览器")
     private String browser;
 
     /** 操作系统 */
-    @ApiModelProperty(value = "操作系统")
+    @ApiModelProperty(value = "操作系统", hidden = true)
     @Excel(name = "操作系统")
     private String os;
 
     /** 提示消息 */
-    @ApiModelProperty(value = "提示消息")
+    @ApiModelProperty(value = "提示消息", hidden = true)
     @Excel(name = "提示消息")
     private String msg;
 
     /** 访问时间 */
-    @ApiModelProperty(value = "访问时间")
+    @ApiModelProperty(value = "访问时间", hidden = true)
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @Excel(name = "访问时间", width = 30, dateFormat = "yyyy-MM-dd HH:mm:ss")
     private Date loginTime;

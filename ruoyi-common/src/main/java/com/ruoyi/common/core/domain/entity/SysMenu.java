@@ -26,7 +26,7 @@ public class SysMenu extends BaseEntity {
     /**
      * 菜单ID
      */
-    @ApiModelProperty(value = "菜单ID")
+    @ApiModelProperty(value = "菜单ID", hidden = true)
     private Long menuId;
 
     /**
@@ -38,49 +38,49 @@ public class SysMenu extends BaseEntity {
     /**
      * 父菜单名称
      */
-    @ApiModelProperty(value = "父菜单名称")
+    @ApiModelProperty(value = "父菜单名称", hidden = true)
     private String parentName;
 
     /**
      * 父菜单ID
      */
-    @ApiModelProperty(value = "父菜单ID")
+    @ApiModelProperty(value = "父菜单ID", hidden = true)
     private Long parentId;
 
     /**
      * 显示顺序
      */
-    @ApiModelProperty(value = "显示顺序")
+    @ApiModelProperty(value = "显示顺序", hidden = true)
     private String orderNum;
 
     /**
      * 路由地址
      */
-    @ApiModelProperty(value = "路由地址")
+    @ApiModelProperty(value = "路由地址", hidden = true)
     private String path;
 
     /**
      * 组件路径
      */
-    @ApiModelProperty(value = "组件路径")
+    @ApiModelProperty(value = "组件路径", hidden = true)
     private String component;
 
     /**
      * 是否为外链（0是 1否）
      */
-    @ApiModelProperty(value = "是否为外链（0是 1否）", allowableValues = "0,1")
+    @ApiModelProperty(value = "是否为外链（0是 1否）", allowableValues = "0,1", hidden = true)
     private String isFrame;
 
     /**
      * 是否缓存（0缓存 1不缓存）
      */
-    @ApiModelProperty(value = "是否缓存（0缓存 1不缓存）", allowableValues = "0,1")
+    @ApiModelProperty(value = "是否缓存（0缓存 1不缓存）", allowableValues = "0,1", hidden = true)
     private String isCache;
 
     /**
      * 类型（M目录 C菜单 F按钮）
      */
-    @ApiModelProperty(value = "类型（M目录 C菜单 F按钮）", allowableValues = "M,C,F")
+    @ApiModelProperty(value = "类型（M目录 C菜单 F按钮）", allowableValues = "M,C,F", hidden = true)
     private String menuType;
 
     /**
@@ -98,13 +98,13 @@ public class SysMenu extends BaseEntity {
     /**
      * 权限字符串
      */
-    @ApiModelProperty(value = "权限字符串")
+    @ApiModelProperty(value = "权限字符串", hidden = true)
     private String perms;
 
     /**
      * 菜单图标
      */
-    @ApiModelProperty(value = "菜单图标")
+    @ApiModelProperty(value = "菜单图标", hidden = true)
     private String icon;
 
     /**

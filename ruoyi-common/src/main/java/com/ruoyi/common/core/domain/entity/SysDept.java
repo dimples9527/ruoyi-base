@@ -27,7 +27,7 @@ public class SysDept extends BaseEntity {
     /**
      * 部门ID
      */
-    @ApiModelProperty(value = "部门ID")
+    @ApiModelProperty(value = "部门ID", hidden = true)
     private Long deptId;
 
     /**
@@ -39,7 +39,7 @@ public class SysDept extends BaseEntity {
     /**
      * 祖级列表
      */
-    @ApiModelProperty(value = "祖级列表")
+    @ApiModelProperty(value = "祖级列表", hidden = true)
     private String ancestors;
 
     /**
@@ -51,25 +51,25 @@ public class SysDept extends BaseEntity {
     /**
      * 显示顺序
      */
-    @ApiModelProperty(value = "显示顺序")
+    @ApiModelProperty(value = "显示顺序", hidden = true)
     private String orderNum;
 
     /**
      * 负责人
      */
-    @ApiModelProperty(value = "负责人")
+    @ApiModelProperty(value = "负责人", hidden = true)
     private String leader;
 
     /**
      * 联系电话
      */
-    @ApiModelProperty(value = "联系电话")
+    @ApiModelProperty(value = "联系电话", hidden = true)
     private String phone;
 
     /**
      * 邮箱
      */
-    @ApiModelProperty(value = "邮箱")
+    @ApiModelProperty(value = "邮箱", hidden = true)
     private String email;
 
     /**
@@ -81,13 +81,13 @@ public class SysDept extends BaseEntity {
     /**
      * 删除标志（0代表存在 2代表删除）
      */
-    @ApiModelProperty(value = "删除标志（0代表存在 2代表删除）", allowableValues = "0,2")
+    @ApiModelProperty(value = "删除标志（0代表存在 2代表删除）", allowableValues = "0,2", hidden = true)
     private String delFlag;
 
     /**
      * 父部门名称
      */
-    @ApiModelProperty(value = "父部门名称")
+    @ApiModelProperty(value = "父部门名称", hidden = true)
     private String parentName;
 
     /**

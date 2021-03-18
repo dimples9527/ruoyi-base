@@ -25,7 +25,7 @@ public class SysPost extends BaseEntity {
     /**
      * 岗位序号
      */
-    @ApiModelProperty(value = "岗位序号")
+    @ApiModelProperty(value = "岗位序号", hidden = true)
     @Excel(name = "岗位序号", cellType = ColumnType.NUMERIC)
     private Long postId;
 
@@ -46,7 +46,7 @@ public class SysPost extends BaseEntity {
     /**
      * 岗位排序
      */
-    @ApiModelProperty(value = "岗位排序")
+    @ApiModelProperty(value = "岗位排序", hidden = true)
     @Excel(name = "岗位排序")
     private String postSort;
 
@@ -60,7 +60,7 @@ public class SysPost extends BaseEntity {
     /**
      * 用户是否存在此岗位标识 默认不存在
      */
-    @ApiModelProperty(value = "用户是否存在此岗位标识", allowableValues = "false,true")
+    @ApiModelProperty(value = "用户是否存在此岗位标识", allowableValues = "false,true", hidden = true)
     private boolean flag = false;
 
     public Long getPostId() {

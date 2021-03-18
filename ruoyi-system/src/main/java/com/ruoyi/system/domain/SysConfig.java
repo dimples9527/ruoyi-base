@@ -24,7 +24,7 @@ public class SysConfig extends BaseEntity
     private static final long serialVersionUID = 1L;
 
     /** 参数主键 */
-    @ApiModelProperty(value = "参数主键")
+    @ApiModelProperty(value = "参数主键", hidden = true)
     @Excel(name = "参数主键", cellType = ColumnType.NUMERIC)
     private Long configId;
 
