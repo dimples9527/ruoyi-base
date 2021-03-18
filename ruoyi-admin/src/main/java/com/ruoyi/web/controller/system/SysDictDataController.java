@@ -28,6 +28,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 
 /**
  * 数据字典信息
@@ -45,6 +46,7 @@ public class SysDictDataController extends BaseController
     @Autowired
     private ISysDictTypeService dictTypeService;
 
+    @ApiOperation(value = "获取字典数据")
     @PreAuthorize("@ss.hasPermi('system:dict:list')")
     @GetMapping("/list")
     public TableDataInfo list(SysDictData dictData)
@@ -54,6 +56,7 @@ public class SysDictDataController extends BaseController
         return getDataTable(list);
     }
 
+    @ApiOperation(value = "导出字典数据")
     @Log(title = "字典数据", businessType = BusinessType.EXPORT)
     @PreAuthorize("@ss.hasPermi('system:dict:export')")
     @GetMapping("/export")
@@ -67,6 +70,7 @@ public class SysDictDataController extends BaseController
     /**
      * 查询字典数据详细
      */
+    @ApiOperation(value = "查询字典数据详细")
     @PreAuthorize("@ss.hasPermi('system:dict:query')")
     @GetMapping(value = "/{dictCode}")
     public AjaxResult getInfo(@PathVariable Long dictCode)
@@ -77,6 +81,7 @@ public class SysDictDataController extends BaseController
     /**
      * 根据字典类型查询字典数据信息
      */
+    @ApiOperation(value = "根据字典类型查询字典数据信息")
     @GetMapping(value = "/type/{dictType}")
     public AjaxResult dictType(@PathVariable String dictType)
     {
@@ -91,6 +96,7 @@ public class SysDictDataController extends BaseController
     /**
      * 新增字典类型
      */
+    @ApiOperation(value = "新增字典类型")
     @PreAuthorize("@ss.hasPermi('system:dict:add')")
     @Log(title = "字典数据", businessType = BusinessType.INSERT)
     @PostMapping
@@ -103,6 +109,7 @@ public class SysDictDataController extends BaseController
     /**
      * 修改保存字典类型
      */
+    @ApiOperation(value = "修改保存字典类型")
     @PreAuthorize("@ss.hasPermi('system:dict:edit')")
     @Log(title = "字典数据", businessType = BusinessType.UPDATE)
     @PutMapping
@@ -115,6 +122,7 @@ public class SysDictDataController extends BaseController
     /**
      * 删除字典类型
      */
+    @ApiOperation(value = "删除字典类型")
     @PreAuthorize("@ss.hasPermi('system:dict:remove')")
     @Log(title = "字典类型", businessType = BusinessType.DELETE)
     @DeleteMapping("/{dictCodes}")

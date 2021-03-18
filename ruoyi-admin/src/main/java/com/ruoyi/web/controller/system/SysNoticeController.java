@@ -42,7 +42,7 @@ public class SysNoticeController extends BaseController {
     /**
      * 获取通知公告列表
      */
-    @ApiOperation(value = "根据角色编号获取详细信息")
+    @ApiOperation(value = "获取公告信息")
     @PreAuthorize("@ss.hasPermi('system:notice:list')")
     @GetMapping("/list")
     public TableDataInfo list(SysNotice notice) {
