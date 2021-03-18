@@ -39,7 +39,7 @@
 		       ifnull(perms, '') as perms,
 		       icon,
 		       create_time
-		from mdm_User.sys_menu
+		from ruoyi.sys_menu
 	</sql>
 
 	<select id="selectMenuList" parameterType="SysMenu" resultMap="SysMenuResult">
@@ -74,7 +74,7 @@
 		                m.icon,
 		                m.order_num,
 		                m.create_time
-		from mdm_User.sys_menu m
+		from ruoyi.sys_menu m
 		where m.menu_type in ('M', 'C')
 		  and m.status = 0
 		order by m.parent_id, m.order_num
@@ -95,10 +95,10 @@
 		m.icon,
 		m.order_num,
 		m.create_time
-		from mdm_User.sys_menu m
-		left join mdm_User.sys_role_menu rm on m.menu_id = rm.menu_id
-		left join mdm_User.sys_user_role ur on rm.role_id = ur.role_id
-		left join mdm_User.sys_role ro on ur.role_id = ro.role_id
+		from ruoyi.sys_menu m
+		left join ruoyi.sys_role_menu rm on m.menu_id = rm.menu_id
+		left join ruoyi.sys_user_role ur on rm.role_id = ur.role_id
+		left join ruoyi.sys_role ro on ur.role_id = ro.role_id
 		where ur.user_id = #{params.userId}
 		<if test="menuName != null and menuName != ''">
 			<bind name="name" value="'%' + menuName + '%'" />
@@ -128,11 +128,11 @@
 		m.icon,
 		m.order_num,
 		m.create_time
-		from mdm_User.sys_menu m
-		left join mdm_User.sys_role_menu rm on m.menu_id = rm.menu_id
-		left join mdm_User.sys_user_role ur on rm.role_id = ur.role_id
-		left join mdm_User.sys_role ro on ur.role_id = ro.role_id
-		left join mdm_User.sys_user u on ur.user_id = u.user_id
+		from ruoyi.sys_menu m
+		left join ruoyi.sys_role_menu rm on m.menu_id = rm.menu_id
+		left join ruoyi.sys_user_role ur on rm.role_id = ur.role_id
+		left join ruoyi.sys_role ro on ur.role_id = ro.role_id
+		left join ruoyi.sys_user u on ur.user_id = u.user_id
 		where u.user_id = #{userId}
 		and m.menu_type in ('M', 'C')
 		and m.status = 0
@@ -155,9 +155,9 @@
 		m.icon,
 		m.order_num,
 		m.create_time
-		from mdm_User.sys_menu m
-		left join mdm_User.sys_role_menu rm on m.menu_id = rm.menu_id
-		left join mdm_User.sys_role ro on ro.role_id = rm.role_id
+		from ruoyi.sys_menu m
+		left join ruoyi.sys_role_menu rm on m.menu_id = rm.menu_id
+		left join ruoyi.sys_role ro on ro.role_id = rm.role_id
 		where ro.role_id = #{roleId}
 		and m.menu_type in ('M', 'C')
 		and m.status = 0
@@ -168,13 +168,13 @@
 
 	<select id="selectMenuListByRoleId" resultType="Integer">
 		select m.menu_id
-		from mdm_User.sys_menu m
-		left join mdm_User.sys_role_menu rm on m.menu_id = rm.menu_id
+		from ruoyi.sys_menu m
+		left join ruoyi.sys_role_menu rm on m.menu_id = rm.menu_id
 		where rm.role_id = #{roleId}
 		<if test="menuCheckStrictly">
 			and m.menu_id not in (select m.parent_id
-			from mdm_User.sys_menu m
-			inner join mdm_User.sys_role_menu rm
+			from ruoyi.sys_menu m
+			inner join ruoyi.sys_role_menu rm
 			on m.menu_id = rm.menu_id and rm.role_id = #{roleId})
 		</if>
 		order by m.parent_id, m.order_num
@@ -182,17 +182,17 @@
 
 	<select id="selectMenuPerms" resultType="String">
 		select distinct m.perms
-		from mdm_User.sys_menu m
-			     left join mdm_User.sys_role_menu rm on m.menu_id = rm.menu_id
-			     left join mdm_User.sys_user_role ur on rm.role_id = ur.role_id
+		from ruoyi.sys_menu m
+			     left join ruoyi.sys_role_menu rm on m.menu_id = rm.menu_id
+			     left join ruoyi.sys_user_role ur on rm.role_id = ur.role_id
 	</select>
 
 	<select id="selectMenuPermsByUserId" parameterType="Long" resultType="String">
 		select distinct m.perms
-		from mdm_User.sys_menu m
-		left join mdm_User.sys_role_menu rm on m.menu_id = rm.menu_id
-		left join mdm_User.sys_user_role ur on rm.role_id = ur.role_id
-		left join mdm_User.sys_role r on r.role_id = ur.role_id
+		from ruoyi.sys_menu m
+		left join ruoyi.sys_role_menu rm on m.menu_id = rm.menu_id
+		left join ruoyi.sys_user_role ur on rm.role_id = ur.role_id
+		left join ruoyi.sys_role r on r.role_id = ur.role_id
 		where m.status = '0'
 		and r.status = '0'
 		and ur.user_id = #{userId}
@@ -200,10 +200,10 @@
 
 	<select id="selectMenuPermsByUserIdRoleKey" resultType="String">
 		select distinct m.perms
-		from mdm_User.sys_menu m
-			     left join mdm_User.sys_role_menu rm on m.menu_id = rm.menu_id
-			     left join mdm_User.sys_user_role ur on rm.role_id = ur.role_id
-			     left join mdm_User.sys_role r on r.role_id = ur.role_id
+		from ruoyi.sys_menu m
+			     left join ruoyi.sys_role_menu rm on m.menu_id = rm.menu_id
+			     left join ruoyi.sys_user_role ur on rm.role_id = ur.role_id
+			     left join ruoyi.sys_role r on r.role_id = ur.role_id
 			where m.status = '0'
 			  and r.status = '0'
 			  and ur.user_id = #{userId}
@@ -222,7 +222,7 @@
 
 	<select id="hasChildByMenuId" resultType="Integer">
 		select count(1)
-		from mdm_User.sys_menu
+		from ruoyi.sys_menu
 		where parent_id = #{menuId}
 	</select>
 
@@ -235,7 +235,7 @@
 	</select>
 
 	<update id="updateMenu" parameterType="SysMenu">
-		update mdm_User.sys_menu
+		update ruoyi.sys_menu
 		<set>
 			<if test="menuName != null and menuName != ''">
 				menu_name = #{menuName},
@@ -285,7 +285,7 @@
 	</update>
 
 	<insert id="insertMenu" parameterType="SysMenu">
-		insert into mdm_User.sys_menu(
+		insert into ruoyi.sys_menu(
 		<if test="menuId != null and menuId != 0">
 			menu_id,
 		</if>
@@ -382,7 +382,7 @@
 
 	<delete id="deleteMenuById" parameterType="Long">
 		delete
-		from mdm_User.sys_menu
+		from ruoyi.sys_menu
 		where menu_id = #{menuId}
 	</delete>
 </mapper>

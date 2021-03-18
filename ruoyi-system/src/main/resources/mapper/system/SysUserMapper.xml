@@ -49,16 +49,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         select u.user_id, u.dept_id, u.user_name, u.nick_name, u.email, u.avatar, u.phonenumber, u.password, u.sex, u.status, u.del_flag, u.login_ip, u.login_date, u.create_by, u.create_time, u.remark,
         d.dept_id, d.parent_id, d.dept_name, d.order_num, d.leader, d.status as dept_status,
         r.role_id, r.role_name, r.role_key, r.role_sort, r.data_scope, r.status as role_status
-        from mdm_User.sys_user u
-		    left join mdm_User.sys_dept d on u.dept_id = d.dept_id
-		    left join mdm_User.sys_user_role ur on u.user_id = ur.user_id
-		    left join mdm_User.sys_role r on r.role_id = ur.role_id
+        from ruoyi.sys_user u
+		    left join ruoyi.sys_dept d on u.dept_id = d.dept_id
+		    left join ruoyi.sys_user_role ur on u.user_id = ur.user_id
+		    left join ruoyi.sys_role r on r.role_id = ur.role_id
     </sql>
 
     <select id="selectUserList" parameterType="SysUser" resultMap="SysUserResult">
 		select u.user_id, u.dept_id, u.nick_name, u.user_name, u.email, u.avatar, u.phonenumber, u.password, u.sex, u.status, u.del_flag, u.login_ip, u.login_date, u.create_by, u.create_time, u.remark, d.dept_name, d.leader
-	    from mdm_User.sys_user u
-		left join mdm_User.sys_dept d on u.dept_id = d.dept_id
+	    from ruoyi.sys_user u
+		left join ruoyi.sys_dept d on u.dept_id = d.dept_id
+	    left join ruoyi.sys_user_role sur on sur.user_id = u.user_id
+	    left join ruoyi.sys_role r on r.role_id = sur.role_id
 		where u.del_flag = '0'
 		<if test="userName != null and userName != ''">
 			<bind name="name" value="'%' + userName + '%'" />
@@ -78,11 +80,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			AND TO_DATE(u.create_time,'%y%m%d') &lt;= TO_DATE(#{params.endTime},'%y%m%d')
 		</if>
 		<if test="deptId != null and deptId != 0">
-			AND (u.dept_id = #{deptId} OR u.dept_id IN ( SELECT t.dept_id FROM mdm_User.sys_dept t WHERE INSTR(ancestors,#{deptId}) > 0 ))
+			AND (u.dept_id = #{deptId} OR u.dept_id IN ( SELECT t.dept_id FROM ruoyi.sys_dept t WHERE INSTR(ancestors,#{deptId}) > 0 ))
 		</if>
-		<!-- 数据范围过滤 -->
-		${params.dataScope}
-	</select>
+	    <if test="roleId != null">
+		    AND r.role_id = #{roleId}
+	    </if>
+	    <!-- 数据范围过滤 -->
+	    ${params.dataScope}
+    </select>
 
 	<select id="selectUserByUserName" parameterType="String" resultMap="SysUserResult">
 	    <include refid="selectUserVo"/>
@@ -100,19 +105,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 
 	<select id="checkUserNameUnique" parameterType="String" resultType="int">
-		SELECT TOP 1 * FROM ( select count(1) from mdm_User.sys_user where user_name = #{userName} ) AS tvl WHERE %vid > 0
+		SELECT TOP 1 * FROM ( select count(1) from ruoyi.sys_user where user_name = #{userName} ) AS tvl WHERE %vid > 0
 	</select>
 
 	<select id="checkPhoneUnique" parameterType="String" resultMap="SysUserResult">
-		SELECT TOP 1 * FROM ( select user_id, phonenumber from mdm_User.sys_user where phonenumber = #{phonenumber} ) AS tvl WHERE %vid > 0
+		SELECT TOP 1 * FROM ( select user_id, phonenumber from ruoyi.sys_user where phonenumber = #{phonenumber} ) AS tvl WHERE %vid > 0
 	</select>
 
 	<select id="checkEmailUnique" parameterType="String" resultMap="SysUserResult">
-		SELECT TOP 1 * FROM (select user_id, email from mdm_User.sys_user where email = #{email} ) AS tvl WHERE %vid > 0
+		SELECT TOP 1 * FROM (select user_id, email from ruoyi.sys_user where email = #{email} ) AS tvl WHERE %vid > 0
 	</select>
 
 	<insert id="insertUser" parameterType="SysUser" useGeneratedKeys="true" keyProperty="userId">
- 		insert into mdm_User.sys_user(
+ 		insert into ruoyi.sys_user(
  			<if test="userId != null and userId != 0">user_id,</if>
  			<if test="deptId != null and deptId != 0">dept_id,</if>
  			<if test="userName != null and userName != ''">user_name,</if>
@@ -144,7 +149,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</insert>
 
 	<update id="updateUser" parameterType="SysUser">
- 		update mdm_User.sys_user
+ 		update ruoyi.sys_user
  		<set>
  			<if test="deptId != null and deptId != 0">dept_id = #{deptId},</if>
  			<if test="userName != null and userName != ''">user_name = #{userName},</if>
@@ -165,23 +170,23 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</update>
 
 	<update id="updateUserStatus" parameterType="SysUser">
- 		update mdm_User.sys_user set status = #{status} where user_id = #{userId}
+ 		update ruoyi.sys_user set status = #{status} where user_id = #{userId}
 	</update>
 
 	<update id="updateUserAvatar" parameterType="SysUser">
- 		update mdm_User.sys_user set avatar = #{avatar} where user_name = #{userName}
+ 		update ruoyi.sys_user set avatar = #{avatar} where user_name = #{userName}
 	</update>
 
 	<update id="resetUserPwd" parameterType="SysUser">
- 		update mdm_User.sys_user set password = #{password} where user_name = #{userName}
+ 		update ruoyi.sys_user set password = #{password} where user_name = #{userName}
 	</update>
 
 	<delete id="deleteUserById" parameterType="Long">
- 		delete from mdm_User.sys_user where user_id = #{userId}
+ 		delete from ruoyi.sys_user where user_id = #{userId}
  	</delete>
 
  	<delete id="deleteUserByIds" parameterType="Long">
- 		update mdm_User.sys_user set del_flag = '2' where user_id in
+ 		update ruoyi.sys_user set del_flag = '2' where user_id in
  		<foreach collection="array" item="userId" open="(" separator="," close=")">
  			#{userId}
         </foreach>

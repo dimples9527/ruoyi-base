@@ -25,7 +25,7 @@
 		       update_by,
 		       update_time,
 		       remark
-		from mdm_User.sys_config
+		from ruoyi.sys_config
 	</sql>
 
 	<!-- 查询条件 -->
@@ -79,7 +79,7 @@
 	</select>
 
 	<insert id="insertConfig" parameterType="SysConfig">
-		insert into mdm_User.sys_config (
+		insert into ruoyi.sys_config (
 		<if test="configName != null and configName != ''">
 			config_name,
 		</if>
@@ -121,7 +121,7 @@
 	</insert>
 
 	<update id="updateConfig" parameterType="SysConfig">
-		update mdm_User.sys_config
+		update ruoyi.sys_config
 		<set>
 			<if test="configName != null and configName != ''">
 				config_name = #{configName},
@@ -148,13 +148,13 @@
 
 	<delete id="deleteConfigById" parameterType="Long">
 		delete
-		from mdm_User.sys_config
+		from ruoyi.sys_config
 		where config_id = #{configId}
 	</delete>
 
 	<delete id="deleteConfigByIds" parameterType="Long">
 		delete
-		from mdm_User.sys_config where config_id in
+		from ruoyi.sys_config where config_id in
 		<foreach item="configId" collection="array" open="(" separator="," close=")">
 			#{configId}
 		</foreach>

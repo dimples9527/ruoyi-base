@@ -10,15 +10,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</resultMap>
 	
 	<select id="checkMenuExistRole" resultType="Integer">
-	    select count(1) from mdm_User.sys_role_menu where menu_id = #{menuId}
+	    select count(1) from ruoyi.sys_role_menu where menu_id = #{menuId}
 	</select>
 
 	<delete id="deleteRoleMenuByRoleId" parameterType="Long">
-		delete from mdm_User.sys_role_menu where role_id=#{roleId}
+		delete from ruoyi.sys_role_menu where role_id=#{roleId}
 	</delete>
 	
 	<delete id="deleteRoleMenu" parameterType="Long">
- 		delete from mdm_User.sys_role_menu where role_id in
+ 		delete from ruoyi.sys_role_menu where role_id in
  		<foreach collection="array" item="roleId" open="(" separator="," close=")">
  			#{roleId}
         </foreach> 
@@ -26,12 +26,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<insert id="batchRoleMenu">
 		<foreach item="item" index="index" collection="list" separator=",">
-			insert into mdm_User.sys_role_menu(role_id, menu_id) values(#{item.roleId},#{item.menuId})
+			insert into ruoyi.sys_role_menu(role_id, menu_id) values(#{item.roleId},#{item.menuId})
 		</foreach>
 	</insert>
 
 	<insert id="insertRoleMenu">
-			insert into mdm_User.sys_role_menu(role_id, menu_id) values(#{roleMenu.roleId},#{roleMenu.menuId})
+			insert into ruoyi.sys_role_menu(role_id, menu_id) values(#{roleMenu.roleId},#{roleMenu.menuId})
 	</insert>
 	
 </mapper> 
