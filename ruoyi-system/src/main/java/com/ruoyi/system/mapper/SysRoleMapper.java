@@ -1,7 +1,11 @@
 package com.ruoyi.system.mapper;
 
-import java.util.List;
 import com.ruoyi.common.core.domain.entity.SysRole;
+import com.ruoyi.system.domain.vo.RoleUserVO;
+
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 /**
  * 角色表 数据层
@@ -17,6 +21,8 @@ public interface SysRoleMapper
      * @return 角色数据集合信息
      */
     public List<SysRole> selectRoleList(SysRole role);
+
+    List<RoleUserVO> selectRoleUserList(@Param("roleKey") String roleKey, @Param("roleName") String roleName);
 
     /**
      * 根据用户ID查询角色
@@ -104,4 +110,5 @@ public interface SysRoleMapper
      * @return 结果
      */
     public int deleteRoleByIds(Long[] roleIds);
+
 }

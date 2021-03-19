@@ -14,6 +14,7 @@ import com.ruoyi.common.utils.StringUtils;
 import com.ruoyi.common.utils.poi.ExcelUtil;
 import com.ruoyi.framework.web.service.SysPermissionService;
 import com.ruoyi.framework.web.service.TokenService;
+import com.ruoyi.system.domain.vo.RoleUserVO;
 import com.ruoyi.system.service.ISysRoleService;
 import com.ruoyi.system.service.ISysUserService;
 
@@ -33,6 +34,7 @@ import java.util.List;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 
 /**
@@ -65,6 +67,19 @@ public class SysRoleController extends BaseController {
         return getDataTable(list);
     }
 
+    @ApiOperation(value = "获取角色用户关联信息")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "roleKey", value = "角色编号", paramType = "query"),
+            @ApiImplicitParam(name = "roleName", value = "角色名称", paramType = "query")
+    })
+    @PreAuthorize("@ss.hasPermi('system:role:list')")
+    @GetMapping("/list/role/user")
+    public TableDataInfo listRoleUser(String roleKey, String roleName) {
+        startPage("role_sort");
+        List<RoleUserVO> list = roleService.selectRoleUserList(roleKey, roleName);
+        return getDataTable(list);
+    }
+
     @ApiOperation(value = "导出角色列表")
     @Log(title = "角色管理", businessType = BusinessType.EXPORT)
     @PreAuthorize("@ss.hasPermi('system:role:export')")
@@ -79,7 +94,7 @@ public class SysRoleController extends BaseController {
      * 根据角色编号获取详细信息
      */
     @ApiOperation(value = "根据角色编号获取详细信息")
-    @ApiImplicitParam(value = "角色编号",name = "roleId",paramType = "path")
+    @ApiImplicitParam(value = "角色编号", name = "roleId", paramType = "path")
     @PreAuthorize("@ss.hasPermi('system:role:query')")
     @GetMapping(value = "/{roleId}")
     public AjaxResult getInfo(@PathVariable Long roleId) {
@@ -162,7 +177,7 @@ public class SysRoleController extends BaseController {
      * 删除角色
      */
     @ApiOperation(value = "删除角色")
-    @ApiImplicitParam(value = "角色编号",name = "roleIds",paramType = "path")
+    @ApiImplicitParam(value = "角色编号", name = "roleIds", paramType = "path")
     @PreAuthorize("@ss.hasPermi('system:role:remove')")
     @Log(title = "角色管理", businessType = BusinessType.DELETE)
     @DeleteMapping("/{roleIds}")

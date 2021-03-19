@@ -20,10 +20,24 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="updateTime"         column="update_time"           />
 		<result property="remark"             column="remark"                />
 	</resultMap>
+
+	<resultMap type="com.ruoyi.system.domain.vo.RoleUserVO" id="SysRoleUserResult">
+		<id     property="roleId"             column="role_id"               />
+		<result property="roleName"           column="role_name"             />
+		<result property="roleKey"            column="role_key"              />
+		<result property="roleSort"           column="role_sort"             />
+		<result property="status"             column="rStatus"                />
+		<collection property="children" ofType="com.ruoyi.system.domain.vo.UserVO">
+			<id     property="userId"       column="user_id"      />
+			<result property="userName"     column="user_name"    />
+			<result property="nickName"     column="nick_name"    />
+			<result property="status"       column="uStatus"       />
+		</collection>
+	</resultMap>
 	
 	<sql id="selectRoleVo">
 	    select distinct r.role_id, r.role_name, r.role_key, r.role_sort, r.data_scope, r.menu_check_strictly, r.dept_check_strictly,
-            r.status, r.del_flag, r.create_time, r.remark 
+            r.status, r.del_flag, r.create_time, r.remark
         from ruoyi.sys_role r
 	        left join ruoyi.sys_user_role ur on ur.role_id = r.role_id
 	        left join ruoyi.sys_user u on u.user_id = ur.user_id
@@ -52,6 +66,24 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</if>
 		<!-- 数据范围过滤 -->
 		${params.dataScope}
+	</select>
+
+	<select id="selectRoleUserList" resultMap="SysRoleResult">
+		select distinct r.role_id, r.role_name, r.role_key, r.role_sort,
+		r.status AS rStatus, u.user_id, u.user_name, u.nick_name, u.status AS uStatus, u.del_flag
+		from ruoyi.sys_role r
+		left join ruoyi.sys_user_role ur on ur.role_id = r.role_id
+		left join ruoyi.sys_user u on u.user_id = ur.user_id
+		left join ruoyi.sys_dept d on u.dept_id = d.dept_id
+		where r.del_flag = '0'
+		<if test="roleName != null and roleName != ''">
+			<bind name="name" value="'%' + roleName + '%'" />
+			AND r.role_name like #{name}
+		</if>
+		<if test="roleKey != null and roleKey != ''">
+			<bind name="key" value="'%' + roleKey + '%'" />
+			AND r.role_key like #{key}
+		</if>
 	</select>
     
 	<select id="selectRolePermissionByUserId" parameterType="Long" resultMap="SysRoleResult">

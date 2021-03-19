@@ -8,6 +8,7 @@ import com.ruoyi.common.utils.StringUtils;
 import com.ruoyi.common.utils.spring.SpringUtils;
 import com.ruoyi.system.domain.SysRoleDept;
 import com.ruoyi.system.domain.SysRoleMenu;
+import com.ruoyi.system.domain.vo.RoleUserVO;
 import com.ruoyi.system.mapper.SysRoleDeptMapper;
 import com.ruoyi.system.mapper.SysRoleMapper;
 import com.ruoyi.system.mapper.SysRoleMenuMapper;
@@ -55,6 +56,11 @@ public class SysRoleServiceImpl implements ISysRoleService
     public List<SysRole> selectRoleList(SysRole role)
     {
         return roleMapper.selectRoleList(role);
+    }
+
+    @Override
+    public List<RoleUserVO> selectRoleUserList(String roleKey, String roleName) {
+        return roleMapper.selectRoleUserList(roleKey, roleName);
     }
 
     /**
