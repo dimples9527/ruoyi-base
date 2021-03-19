@@ -68,7 +68,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		${params.dataScope}
 	</select>
 
-	<select id="selectRoleUserList" resultMap="SysRoleResult">
+	<select id="selectRoleUserList" resultMap="SysRoleUserResult">
 		select distinct r.role_id, r.role_name, r.role_key, r.role_sort,
 		r.status AS rStatus, u.user_id, u.user_name, u.nick_name, u.status AS uStatus, u.del_flag
 		from ruoyi.sys_role r

@@ -73,9 +73,8 @@ public class SysRoleController extends BaseController {
             @ApiImplicitParam(name = "roleName", value = "角色名称", paramType = "query")
     })
     @PreAuthorize("@ss.hasPermi('system:role:list')")
-    @GetMapping("/list/role/user")
+    @GetMapping("/list/user")
     public TableDataInfo listRoleUser(String roleKey, String roleName) {
-        startPage("role_sort");
         List<RoleUserVO> list = roleService.selectRoleUserList(roleKey, roleName);
         return getDataTable(list);
     }
