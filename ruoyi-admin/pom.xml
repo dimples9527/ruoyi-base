@@ -71,10 +71,10 @@
         </dependency>
 
         <!-- 定时任务-->
-        <!--<dependency>
+        <dependency>
             <groupId>com.ruoyi.cache</groupId>
-            <artifactId>ruoyi-quartz</artifactId>
-        </dependency>-->
+            <artifactId>ruoyi-cache-quartz</artifactId>
+        </dependency>
 
         <!-- 代码生成-->
         <!--<dependency>

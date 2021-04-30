@@ -45,4 +45,4 @@ nbdist/
 
 /ruoyi-ui/
 
-/cache-test
+#/cache-test
