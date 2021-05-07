@@ -1,13 +1,5 @@
 package com.ruoyi.framework.aspectj;
 
-import java.lang.reflect.Method;
-import org.aspectj.lang.JoinPoint;
-import org.aspectj.lang.Signature;
-import org.aspectj.lang.annotation.Aspect;
-import org.aspectj.lang.annotation.Before;
-import org.aspectj.lang.annotation.Pointcut;
-import org.aspectj.lang.reflect.MethodSignature;
-import org.springframework.stereotype.Component;
 import com.ruoyi.common.annotation.DataScope;
 import com.ruoyi.common.core.domain.BaseEntity;
 import com.ruoyi.common.core.domain.entity.SysRole;
@@ -17,6 +9,16 @@ import com.ruoyi.common.utils.ServletUtils;
 import com.ruoyi.common.utils.StringUtils;
 import com.ruoyi.common.utils.spring.SpringUtils;
 import com.ruoyi.framework.web.service.TokenService;
+
+import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.Signature;
+import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.Before;
+import org.aspectj.lang.annotation.Pointcut;
+import org.aspectj.lang.reflect.MethodSignature;
+import org.springframework.stereotype.Component;
+
+import java.lang.reflect.Method;
 
 /**
  * 数据过滤处理
@@ -113,7 +115,7 @@ public class DataScopeAspect
             else if (DATA_SCOPE_CUSTOM.equals(dataScope))
             {
                 sqlString.append(StringUtils.format(
-                        " OR {}.dept_id IN ( SELECT dept_id FROM sys_role_dept WHERE role_id = {} ) ", deptAlias,
+                        " OR {}.dept_id IN ( SELECT dept_id FROM ruoyi.sys_role_dept WHERE role_id = {} ) ", deptAlias,
                         role.getRoleId()));
             }
             else if (DATA_SCOPE_DEPT.equals(dataScope))
@@ -123,7 +125,7 @@ public class DataScopeAspect
             else if (DATA_SCOPE_DEPT_AND_CHILD.equals(dataScope))
             {
                 sqlString.append(StringUtils.format(
-                        " OR {}.dept_id IN ( SELECT dept_id FROM sys_dept WHERE dept_id = {} or find_in_set( {} , ancestors ) )",
+                        " OR {}.dept_id IN ( SELECT dept_id FROM ruoyi.sys_dept WHERE dept_id = {} or find_in_set( {} , ancestors ) )",
                         deptAlias, user.getDeptId(), user.getDeptId()));
             }
             else if (DATA_SCOPE_SELF.equals(dataScope))
